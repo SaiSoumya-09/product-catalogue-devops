@@ -47,4 +47,9 @@ public class ProductController {
     public String deleteProduct(@PathVariable int id) {
         return service.deleteProduct(id);
     }
+
+    @GetMapping("/health")
+    public String health(){
+        return "Product Catalogue service is UP";
+    }
 }
