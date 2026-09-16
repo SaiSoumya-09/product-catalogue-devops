@@ -52,4 +52,9 @@ public class ProductController {
     public String health(){
         return "Product Catalogue service is UP";
     }
+
+    @GetMapping("/products/search")
+    public List<Product> searchProducts(@RequestParam String keyword) {
+        return service.searchProducts(keyword);
+    }
 }
