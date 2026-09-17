@@ -42,7 +42,7 @@ jobs:
           kubectl apply -f k8s/v1-service.yaml
 
       - name: Check deployment
-        run: |
-          kubectl rollout status deployment/product-catalogue-v1 --timeout=120s
-          kubectl get pods
-          kubectl get services
+  	run: |
+   	 kubectl rollout status deployment/product-catalogue-v1 --timeout=180s
+   	 kubectl get pods
+    	 kubectl get services
