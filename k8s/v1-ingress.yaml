@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: product-catalogue-v1-ingress
+  namespace: default
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+spec:
+  ingressClassName: nginx
+  rules:
+    - http:
+        paths:
+          - path: /v1(/|$)(.*)
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: product-catalogue-v1-service
+                port:
+                  number: 80
