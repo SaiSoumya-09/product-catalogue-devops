@@ -27,13 +27,13 @@ jobs:
         run: mvn clean package -DskipTests
 
       - name: Build Docker image
-        run: docker build -t product-catalogue:${{ github.sha }} .
+        run: docker build -t product-catalogue:v1.
 
       - name: Start Minikube
         uses: medyagh/setup-minikube@latest
 
       - name: Load Docker image into Minikube
-        run: minikube image load product-catalogue:${{ github.sha }}
+        run: minikube image load product-catalogue:v1.
 
       - name: Deploy Kubernetes application
         run: |
