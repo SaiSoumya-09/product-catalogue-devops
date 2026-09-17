@@ -4,6 +4,8 @@ import com.javatechie.crud.example.entity.Product;
 import com.javatechie.crud.example.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -54,7 +56,21 @@ public class ProductController {
     }
 
     @GetMapping("/products/search")
-    public List<Product> searchProducts(@RequestParam String keyword) {
+    public List<Product> searchProducts(
+            @RequestParam String keyword,
+            @RequestParam(required = false) Double maxPrice) {
+
+        if (keyword == null || keyword.trim().isEmpty()) {
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST,
+                    "Keyword cannot be empty"
+            );
+        }
+
+        if (maxPrice != null) {
+            return service.searchProducts(keyword, maxPrice);
+        }
+
         return service.searchProducts(keyword);
     }
 }

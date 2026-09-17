@@ -36,6 +36,10 @@ public class ProductService {
         return repository.findByNameContainingIgnoreCase(keyword);
     }
 
+    public List<Product> searchProducts(String keyword, double maxPrice) {
+        return repository.findByNameContainingIgnoreCaseAndPriceLessThanEqual(keyword, maxPrice);
+    }
+
     public String deleteProduct(int id) {
         repository.deleteById(id);
         return "product removed !! " + id;
