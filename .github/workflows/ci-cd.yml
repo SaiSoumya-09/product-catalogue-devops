@@ -45,4 +45,4 @@ jobs:
           kubectl apply --dry-run=client -f k8s/v1-service.yaml
 
       - name: CI/CD completed
-        run:run: echo "Build, Docker image creation, health check, and Kubernetes configuration validation completed successfully."
+        run: echo "Build, Docker image creation, health check, and Kubernetes configuration validation completed successfully."
