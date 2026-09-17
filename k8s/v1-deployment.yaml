@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: product-catalogue-v1
+  labels:
+    app: product-catalogue-v1
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: product-catalogue-v1
+  template:
+    metadata:
+      labels:
+        app: product-catalogue-v1
+    spec:
+      containers:
+        - name: product-catalogue
+          image: product-catalogue:v1
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 9191
+          env:
+            - name: SPRING_DATASOURCE_URL
+              value: jdbc:mysql://task2-mysql:3306/javatechie
+            - name: SPRING_DATASOURCE_USERNAME
+              value: root
+            - name: SPRING_DATASOURCE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: MYSQL_ROOT_PASSWORD
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "256Mi"
+            limits:
+              cpu: "500m"
+              memory: "512Mi"
